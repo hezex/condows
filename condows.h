@@ -34,6 +34,7 @@ using namespace std;
 #include "conuser.h"
 
 #undef _CONDOWS__
+
 #else
 #error '_CONDOWS__' has been defined
 #endif
