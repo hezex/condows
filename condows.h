@@ -1,13 +1,3 @@
-/*
-###################################################
- ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
-###################################################
-##################### Warning #####################
-###################################################
- ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! 
-###################################################
-Be careful of 'Redefine'
-*/
 /**
  * The impression of console to people was always ununderstandable and uncomfortable.
  * As for the programmers, face to thousands of data should not be fun.
@@ -18,20 +8,14 @@ Be careful of 'Redefine'
  * No warranty is given. Condows is open source on Github
  * You can get the latest version on https://github.com/hezex/condows
  */
-#include <iostream>
-#include <cstdio>
-#include <queue>
-#include <windows.h>
-
-using namespace std;
-
+ 
 #ifndef _CONDOWS__
 #define _CONDOWS__
 
-#include "condef.h"
-#include "conctrl.h"
-#include "conmsg.h"
-#include "conuser.h"
+#include "condef.hpp"
+#include "conctrl.hpp"
+#include "conmsg.hpp"
+#include "conuser.hpp"
 
 #undef _CONDOWS__
 
