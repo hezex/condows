@@ -12,10 +12,12 @@
 #ifndef _CONDOWS__
 #define _CONDOWS__
 
+#define _CONDOWS_VERSION__ 0x00
+
 #include "condef.hpp"
+#include "conuser.hpp"
 #include "conctrl.hpp"
 #include "conmsg.hpp"
-#include "conuser.hpp"
 
 #undef _CONDOWS__
 
