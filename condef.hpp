@@ -14,14 +14,14 @@
 #define CM_OFFFOCUS 0x10000003
 #define CM_KBPRESS 0x10000004
 #define CM_KBBOUNCE 0x10000005
-
-#define CMB_ONCLICK 0x11000000
-#define CMB_ONPRESS 0x11000001
-#define CMB_ONBOUNCE 0X11000002
+#define CM_COMMAND 0x10000006
 
 //Condows Styles
-//#define CS_BORDER 0x10000000
-//#define CS_ENABLE_CLOSE 0x10000001
+//#define CS_BORDER 0x10000001
+//#define CS_ENABLECLOSE 0x10000002
+#define CS_VISIBLE 0x10000004
+//Condows Button Styles
+//#define CBS_CHECKBOX 0x20000001
 
 //Command Colors
 /*Use (<<4) to set background colors*/
@@ -50,6 +50,7 @@
 #define CP_LIGHT 8
 #define FOREGROUND(x) (x)
 #define BACKGROUND(x) (x<<4)
+#define FB_EXCHANGE(x) (((x&0xf)<<4)|(x>>4))
 
 //Basic Functions
 void SetOutputPos(short,short);
@@ -58,6 +59,31 @@ COORD GetOutputPos();
 //COORD GetOutputAttributes();
 SMALL_RECT GetOutputRect();
 
+struct CONMSG
+{
+	
+};
+
+typedef void *HCND;
+typedef long long CPARAM;
+
+typedef void(*CONMSGCALLBACK)(HCND,CONMSG);
+
+struct CNDCLASS
+{
+	char **Fill;
+	CONMSGCALLBACK MsgProc;
+	char bkColor; //You can use command palette here
+	const char *ClassName;
+};
+struct CND__
+{
+	CNDCLASS cndClass;
+	char *Caption;
+	COORD capPos;
+	int x,y;
+	int h,w;
+};
 
 //condef.cpp
 /**
@@ -76,5 +102,19 @@ void SetOutputPos(short x,short y)
 void SetOutputColor(char color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
+}
+
+COORD GetOutputPos()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&csbi);
+	return csbi.dwCursorPosition;
+}
+
+SMALL_RECT GetOutputRect()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&csbi);
+	return csbi.srWindow;
 }
 
