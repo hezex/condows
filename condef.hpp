@@ -5,16 +5,19 @@
  * No warranty is given. Condows is open source on Github
 */
 
+#define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)
+
 #define CON_NULL 0
 
 //Condows Messages
 #define CM_CREATE 0x10000000
-#define CM_DELETE 0x10000001
+//#define CM_DESTORY 0x10000001
 #define CM_ONFOCUS 0x10000002
 #define CM_OFFFOCUS 0x10000003
-#define CM_KBPRESS 0x10000004
-#define CM_KBBOUNCE 0x10000005
+#define CM_KBDOWN 0x10000004
+#define CM_KBUP 0x10000005
 #define CM_COMMAND 0x10000006
+#define CM_FOCUSNXT 0x10000007
 
 //Condows Styles
 //#define CS_BORDER 0x10000001
@@ -59,16 +62,17 @@ COORD GetOutputPos();
 //COORD GetOutputAttributes();
 SMALL_RECT GetOutputRect();
 
-struct CONMSG
-{
-	
-};
 
 typedef void *HCND;
 typedef long long CPARAM;
 
 typedef void(*CONMSGCALLBACK)(HCND,CONMSG);
 
+struct CONMSG
+{
+	int msg;
+	CPARAM para;
+};
 struct CNDCLASS
 {
 	char **Fill;
